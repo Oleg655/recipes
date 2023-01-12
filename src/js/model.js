@@ -1,15 +1,13 @@
 import { API_URL } from "./config.js";
+import { getJson } from "./helpers.js";
 export const state = {
 	recipe: {},
 };
 
 export const loadRecipe = async function (id) {
 	try {
-		const response = await fetch(`${API_URL}/${id}`);
-		const data = await response.json();
-
-		if (!response.ok) throw new Error(`${data.message} (${response.status})`);
-
+		const data = await getJson(`${API_URL}/${id}`)
+		
 		const { recipe } = data.data;
 		state.recipe = {
 			id: recipe.id,
@@ -23,6 +21,6 @@ export const loadRecipe = async function (id) {
 		};
 		console.log(state.recipe);
 	} catch (error) {
-		alert(error);
+		console.log(error);
 	}
 };
