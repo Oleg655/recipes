@@ -46,7 +46,7 @@ class RecipeView {
           </div>
 		`
 		this.#clear()
-		
+		this.#parentElement.insertAdjacentHTML('afterbegin', markup);
 	}
 
 	#generateMarkup() {
