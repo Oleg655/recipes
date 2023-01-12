@@ -4,7 +4,7 @@ const timeout = function (second) {
 	return new Promise(function (_, reject) {
 		setTimeout(function () {
 			reject(new Error(`Request took too long! Timeout after ${second} second`));
-		}, s * 1000);
+		}, second * 1000);
 	});
 };
 
