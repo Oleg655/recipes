@@ -25,11 +25,13 @@ class RecipeView {
           </svg>
         </div>
 	`;
-		this.#clear()
+		this.#parentElement.innerHTML = '';
 		this.#parentElement.insertAdjacentHTML('afterbegin', markup);
 	};
 
-	renderError(message) {
+	
+
+	renderError(message){
 		const markup = `
 			<div class="error">
             <div>
@@ -41,7 +43,7 @@ class RecipeView {
           </div>
 		`
 		this.#clear()
-		this.#parentElement.insertAdjacentHTML('afterbegin', markup)
+		
 	}
 
 	#generateMarkup() {
