@@ -25,16 +25,16 @@ class RecipeView {
           </svg>
         </div>
 	`;
-		this.#parentElement.innerHTML = '';
+		this.#clear()
 		this.#parentElement.insertAdjacentHTML('afterbegin', markup);
 	};
 
-	addHandlerRender(handler){
+	addHandlerRender(handler) {
 		window.addEventListener('load', handler)
 		window.addEventListener('hashchange', handler)
 	}
 
-	renderError(message){
+	renderError(message) {
 		const markup = `
 			<div class="error">
             <div>
