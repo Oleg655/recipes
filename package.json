@@ -1,10 +1,13 @@
 {
   "name": "forkify",
   "version": "1.0.0",
+  "homepage": "https://Oleg655.github.io/search-recipes",
   "description": "Recipe application",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Oleg",
   "license": "ISC",
@@ -14,6 +17,7 @@
   },
   "dependencies": {
     "fractional": "^1.0.0",
+    "gh-pages": "^4.0.0",
     "sass": "^1.57.0"
   }
 }
