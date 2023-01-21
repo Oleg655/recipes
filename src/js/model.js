@@ -99,11 +99,35 @@ export const deleteBookmark = function (id) {
 const init = function () {
 	const storage = localStorage.getItem('bookmarks')
 
-	if(storage) state.bookmarks = JSON.parse(storage)
+	if (storage) state.bookmarks = JSON.parse(storage)
 }
 
 init()
 
-const clearBookmarks = function(){
+const clearBookmarks = function () {
 	localStorage.clear('bookmarks')
+}
+
+export const uploadRecipe = async function (newRecipe) {
+	try {
+		const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+			.map(ingredient => {
+				const ingredientArray = ingredient[1].replaceAll(' ', '').split(',')
+				if (ingredientArray.length !== 3) throw new Error('Wrong ingredient format! Please use the correct format')
+				const [quantity, unit, description] = ingredientArray
+				return { quantity: quantity ? +quantity : null, unit, description }
+			})
+		const recipe = {
+			title: newRecipe.title,
+			source_url: newRecipe.sourceUrl,
+			image_url: newRecipe.image,
+			publisher: newRecipe.publisher,
+			cooking_time: +newRecipe.cookingTime,
+			servings: +newRecipe.servings,
+			ingredients,
+		}
+		console.log(recipe)
+	} catch (error) {
+		throw error
+	}
 }
