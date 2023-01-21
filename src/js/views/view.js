@@ -19,12 +19,9 @@ export default class View {
 		const newDom = document.createRange().createContextualFragment(newMarkup)
 		const newElements = Array.from(newDom.querySelectorAll('*'))
 		const currentElements = Array.from(this._parentElement.querySelectorAll('*'))
-		console.log(currentElements)
-		console.log(newElements)
 
 		newElements.forEach((newElement, index) => {
 			const currentElement = currentElements[index]
-			console.log(currentElement, newElement.isEqualNode(currentElement))
 
 			if (!newElement.isEqualNode(currentElement) && newElement.firstChild?.nodeValue.trim() !== '') {
 				currentElement.textContent = newElement.textContent
