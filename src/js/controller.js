@@ -1,4 +1,5 @@
 import * as model from './model.js';
+import { MODAL_CLOSE_SECONDS } from './config.js'
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
@@ -74,7 +75,18 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
 	try {
+		addRecipeView.renderSpinner()
+
 		await model.uploadRecipe(newRecipe)
+		console.log(model.state.recipe)
+
+		recipeView.render(model.state.recipe)
+
+		addRecipeView.renderMessage()
+
+		setTimeout(function () {
+			addRecipeView.toggleWindow()
+		}, MODAL_CLOSE_SECONDS * 1000)
 	} catch (error) {
 		console.log(error)
 		addRecipeView.renderError(error.message)

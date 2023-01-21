@@ -8,16 +8,38 @@ const timeout = function (second) {
 	});
 };
 
-export const getJson = async function(url){
-	try{
-		const response = await Promise.race([fetch(url), timeout(TIMEOUT_SECONDS)]) ;
+export const getJson = async function (url) {
+	try {
+		const fetchData = fetch(url)
+		const response = await Promise.race([fetchData, timeout(TIMEOUT_SECONDS)]);
 		const data = await response.json();
 
 		if (!response.ok) throw new Error(`${data.message} (${response.status})`);
 
 		return data
-	}catch(error){
+	} catch (error) {
 		throw error
 	}
-	
 }
+
+export const sendJson = async function (url, uploadData) {
+	try {
+		const fetchData = fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(uploadData)
+		})
+		const response = await Promise.race([fetchData, timeout(TIMEOUT_SECONDS)]);
+		const data = await response.json();
+
+		if (!response.ok) throw new Error(`${data.message} (${response.status})`);
+
+		return data
+	} catch (error) {
+		throw error
+	}
+
+}
+
