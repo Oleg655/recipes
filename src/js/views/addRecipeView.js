@@ -1,7 +1,7 @@
 import View from './view.js'
 
 class AddRecipeView extends View {
-	_parentElement = document.querySelector('.pagination')
+	_parentElement = document.querySelector('.upload')
 
 	_window = document.querySelector('.add-recipe-window')
 	_overlay = document.querySelector('.overlay')
@@ -28,9 +28,14 @@ class AddRecipeView extends View {
 		this._overlay.addEventListener('click', this.toggleWindow.bind(this))
 	}
 
-	addHandlerUpload() {
+	addHandlerUpload(handler) {
 		this._parentElement.addEventListener('submit', function (event) {
 			event.preventDefault()
+			const dataArray = [...new FormData(this)]
+			console.log(dataArray)
+			const data = Object.fromEntries(dataArray)
+			handler(data)
+
 		})
 	}
 
