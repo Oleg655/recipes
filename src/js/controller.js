@@ -7,9 +7,6 @@ import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
-// if(module.hot){
-// 	module.hot.accept()
-// }
 
 const controlRecipes = async function () {
 	try {

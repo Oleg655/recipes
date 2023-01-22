@@ -19,7 +19,6 @@ class PaginationView extends View {
 		const currentPage = this._data.page
 
 		const numberPage = Math.ceil(this._data.results.length / this._data.resultsPerPage)
-		console.log(numberPage)
 
 		if (currentPage === 1 && numberPage > 1) {
 			return `<button data-goto="${currentPage + 1}" "${currentPage + 1}" class="btn--inline pagination__btn--next">

@@ -56,6 +56,7 @@ export const loadSearchResults = async function (query) {
 			}
 		})
 		state.search.page = 1
+		console.log(state.search.page)
 	} catch (error) {
 		throw error
 	}
