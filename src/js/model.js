@@ -23,7 +23,7 @@ const createRecipeObject = function (data) {
 		servings: recipe.servings,
 		cookingTime: recipe.cooking_time,
 		ingredients: recipe.ingredients,
-		...(recipe.key && { key: recipe.key })
+		...(recipe.key && { key: recipe.key }),
 	};
 }
 
@@ -45,7 +45,6 @@ export const loadSearchResults = async function (query) {
 	try {
 		state.search.query = query
 		const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`)
-		console.log(data)
 
 		state.search.results = data.data.recipes.map(recipe => {
 			return {
@@ -53,6 +52,7 @@ export const loadSearchResults = async function (query) {
 				title: recipe.title,
 				publisher: recipe.publisher,
 				image: recipe.image_url,
+				...(recipe.key && { key: recipe.key }),
 			}
 		})
 		state.search.page = 1
@@ -114,7 +114,7 @@ export const uploadRecipe = async function (newRecipe) {
 	try {
 		const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
 			.map(ingredient => {
-				const ingredientArray = ingredient[1].replaceAll(' ', '').split(',')
+				const ingredientArray = ingredient[1].split(',').map(element => element.trim())
 				if (ingredientArray.length !== 3) throw new Error('Wrong ingredient format! Please use the correct format')
 				const [quantity, unit, description] = ingredientArray
 				return { quantity: quantity ? +quantity : null, unit, description }
